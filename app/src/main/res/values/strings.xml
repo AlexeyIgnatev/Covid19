@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Covid19</string>
+    <string name="covid">covid</string>
+    <string name="start">Старт</string>
+    <string name="show_danger_zone">Показывать опасную зону</string>
+</resources>
