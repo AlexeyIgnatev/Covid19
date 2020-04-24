@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
         population_text.text = "Популяция: ${populationSize}. Нажмите СТАРТ для обновления"
         population_bar.progress = populationSize
 
-        danger_zone_text.text = "Опасная зона: $dangerZone пикселей"
+        danger_zone_text.text = "Зона заражения: $dangerZone пикселей"
         danger_zone_bar.progress = dangerZone
 
         danger_zone_check_box.setTextColor(infect_rate_text.textColors)
@@ -177,7 +177,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
             }
             R.id.danger_zone_bar -> {
                 dangerZone = progress
-                danger_zone_text.text = "Опасная зона: $dangerZone пикселей"
+                danger_zone_text.text = "Зона заражения: $dangerZone пикселей"
             }
         }
     }
