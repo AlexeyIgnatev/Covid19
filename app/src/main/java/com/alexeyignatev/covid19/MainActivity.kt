@@ -13,7 +13,10 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Math.pow
 import kotlin.math.abs
+import kotlin.math.pow
+import kotlin.math.sqrt
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
@@ -115,8 +118,10 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
     private fun start() {
         for (i in infectedPersons) {
             for (j in healthyPersons) {
-                if (abs(i.x - j.x) < dangerZone && abs(i.y - j.y) < dangerZone && (Random.nextInt(100) + 1) <= infectRate) {
-                    j.isInfected = true
+                if ((Random.nextInt(100) + 1) <= infectRate) {
+                    if (sqrt((i.x - j.x).toDouble().pow(2) + (i.y - j.y).toDouble().pow(2)) <= dangerZone) {
+                        j.isInfected = true
+                    }
                 }
             }
         }
@@ -138,15 +143,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
         canvas.drawPaint(fillPaint)
         for (i in persons) {
             if (showDangerZone) {
-                var x = i.x - dangerZone
-                var y = i.y - dangerZone
-                var x1 = i.x + dangerZone
-                var y1 = i.y + dangerZone
-                if (x < 0) x = 0
-                if (y < 0) y = 0
-                if (x1 > size) x1 = size
-                if (y1 > size) y1 = size
-                canvas.drawRect(x.toFloat(), y.toFloat(), x1.toFloat(), y1.toFloat(), dangerZonePaint)
+                canvas.drawCircle(i.x.toFloat(), i.y.toFloat(), dangerZone.toFloat(), dangerZonePaint)
             }
             if (i.isInfected) {
                 canvas.drawCircle(i.x.toFloat(), i.y.toFloat(), circleRadius, infectedPaint)
